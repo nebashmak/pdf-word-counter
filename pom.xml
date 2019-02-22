@@ -8,8 +8,10 @@
   <name>pdf-words-parser</name>
   <url>http://maven.apache.org</url>
   <properties>
-          <jupiter.version>5.4.0</jupiter.version>
-          <vintage.version>5.4.0</vintage.version>
+    <jupiter.version>5.4.0</jupiter.version>
+    <vintage.version>5.4.0</vintage.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
   </properties>
   <dependencies>
     <dependency>
