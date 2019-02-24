@@ -4,6 +4,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class App 
@@ -14,11 +16,18 @@ public class App
         try (PDDocument document = PDDocument.load(file)) {
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(document);
-            Scanner scanner = new Scanner(text);
-//            System.out.println(text);
-            while (scanner.hasNext()) {
-                System.out.println(scanner.next());
-            }
+            Map<String, Integer> hashmap = new HashMap<String, Integer>();
+
+            Scanner sc = new Scanner(text).useDelimiter("\\d*\\b?\\n*\\s*\\W?\\W{1,3}\\W?\\s*\\n*\\b?\\d*");
+            while (sc.hasNext()){
+                String word = sc.next().toLowerCase();
+                Integer frequency = hashmap.get(word);
+                hashmap.put(word, frequency == null ? 1 : frequency + 1);
+                }
+
+            for (Map.Entry<String, Integer> entry: hashmap.entrySet())
+                System.out.println(entry.getKey() + " = " + entry.getValue());
+
         } catch (Exception ex) {
             System.out.println(ex);
         }
