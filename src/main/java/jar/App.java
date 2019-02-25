@@ -1,5 +1,6 @@
 package jar;
 
+import filePath.ResourceAware;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
@@ -16,7 +17,7 @@ public class App
         try (PDDocument document = PDDocument.load(file)) {
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(document);
-            Map<String, Integer> hashmap = new HashMap<String, Integer>();
+            Map<String, Integer> hashmap = new HashMap<>();
 
             Scanner sc = new Scanner(text).useDelimiter("\\d*\\b?\\n*\\s*\\W?\\W{1,3}\\W?\\s*\\n*\\b?\\d*");
             while (sc.hasNext()){
