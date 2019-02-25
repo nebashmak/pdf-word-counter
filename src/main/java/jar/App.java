@@ -1,6 +1,6 @@
 package jar;
 
-import filePath.ResourceAware;
+import file_path.ResourceAware;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
