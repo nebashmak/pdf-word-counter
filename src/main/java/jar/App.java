@@ -14,6 +14,7 @@ public class App
     public static void main( String[] args )
     {
         File file = new File(ResourceAware.getPath());
+        System.out.println("Файл получен, идет обработка...");
         try (PDDocument document = PDDocument.load(file)) {
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(document);

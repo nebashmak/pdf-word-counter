@@ -29,8 +29,8 @@ public class ResourceAware {
 
     public static String getPath(InputStream in, OutputStream out) {
         String path = null;
-        try (BufferedReader pathReader = new BufferedReader(new InputStreamReader(in));
-             PrintStream errorOutput = new PrintStream(new BufferedOutputStream(out))) {
+        PrintStream errorOutput = new PrintStream(new BufferedOutputStream(out));
+        try (BufferedReader pathReader = new BufferedReader(new InputStreamReader(in))) {
             while (isNull(path)) {
                 try {
                     path = getPathFromReader(pathReader);
@@ -50,6 +50,7 @@ public class ResourceAware {
 
     public static String getPathFromReader(BufferedReader in) throws InterruptedException, IOException {
         String path = null;
+        System.out.println("Введите путь к файлу");
         while (!in.ready()) {
             Thread.sleep(100);
         }
