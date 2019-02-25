@@ -3,6 +3,9 @@ package file_path;
 import file_path.exceptions.NotPdfException;
 
 import java.io.*;
+import java.util.Optional;
+
+import static java.util.Objects.isNull;
 
 public class ResourceAware {
     private ResourceAware() {
@@ -28,15 +31,15 @@ public class ResourceAware {
         String path = null;
         try (BufferedReader pathReader = new BufferedReader(new InputStreamReader(in));
              PrintStream errorOutput = new PrintStream(new BufferedOutputStream(out))) {
-            while (true) {
+            while (isNull(path)) {
                 try {
                     path = getPathFromReader(pathReader);
-                    break;
                 } catch (FileNotFoundException | NotPdfException ex) {
                     errorOutput.println(ex.getMessage());
                 } catch (IOException ex) {
                     errorOutput.println("Ошибка чтения, попробуйте еще раз");
                 }
+                errorOutput.flush();
             }
         } catch (Exception ex) {
             System.out.println(ex);
@@ -45,8 +48,12 @@ public class ResourceAware {
         return path;
     }
 
-    public static String getPathFromReader(BufferedReader in) throws IOException {
-        String path = in.readLine();
+    public static String getPathFromReader(BufferedReader in) throws InterruptedException, IOException {
+        String path = null;
+        while (!in.ready()) {
+            Thread.sleep(100);
+        }
+        path = Optional.ofNullable(in.readLine()).orElseThrow(IOException::new);
         File file = new File(path);
         if (!file.exists()) {
             throw new FileNotFoundException("Файл не найден, попробуйте еще раз");
