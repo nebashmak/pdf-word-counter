@@ -8,5 +8,6 @@ public class WordCounter
     {
         PdfReader fileReader = PdfReader.getPdfReader();
         fileReader.countWordsInPdf(ResourceAware.getPath());
+        fileReader.printWordCount(System.out);
     }
 }
