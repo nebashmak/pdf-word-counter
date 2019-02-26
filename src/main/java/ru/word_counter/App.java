@@ -18,16 +18,15 @@ public class App
         try (PDDocument document = PDDocument.load(file)) {
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(document);
-            Map<String, Integer> hashmap = new HashMap<>();
+            Map<String, Integer> wordCountMap = new HashMap<>();
 
             Scanner sc = new Scanner(text).useDelimiter("[^a-zA-Z]+");
-            while (sc.hasNext()){
+            while (sc.hasNext()) {
                 String word = sc.next().toLowerCase();
-                Integer frequency = hashmap.get(word);
-                hashmap.put(word, frequency == null ? 1 : frequency + 1);
-                }
-
-            for (Map.Entry<String, Integer> entry: hashmap.entrySet())
+                Integer frequency = wordCountMap.getOrDefault(word, 0);
+                wordCountMap.put(word, ++frequency);
+            }
+            for (Map.Entry<String, Integer> entry: wordCountMap.entrySet())
                 System.out.println(entry.getKey() + " = " + entry.getValue());
 
         } catch (Exception ex) {
