@@ -2,18 +2,27 @@ package ru.word_counter;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import ru.word_counter.file_source.ResourceAware;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class App 
-{
-    public static void main( String[] args )
-    {
-        File file = new File(ResourceAware.getPath());
+import static java.util.Objects.isNull;
+
+public class PdfReader {
+
+    private static PdfReader pdfReader;
+
+    private PdfReader() {}
+
+    public static PdfReader getPdfReader() {
+        if (isNull(pdfReader)) pdfReader = new PdfReader();
+        return pdfReader;
+    }
+
+    public void readPdfFile(String pdfFilePath) {
+        File file = new File(pdfFilePath);
         System.out.println("Файл получен, идет обработка...");
         try (PDDocument document = PDDocument.load(file)) {
             PDFTextStripper stripper = new PDFTextStripper();
