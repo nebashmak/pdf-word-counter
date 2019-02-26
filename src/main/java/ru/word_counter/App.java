@@ -1,8 +1,8 @@
-package jar;
+package ru.word_counter;
 
-import file_path.ResourceAware;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import ru.word_counter.file_source.ResourceAware;
 
 import java.io.File;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class App
             String text = stripper.getText(document);
             Map<String, Integer> hashmap = new HashMap<>();
 
-            Scanner sc = new Scanner(text).useDelimiter("\\d*\\b?\\n*\\s*\\W?\\W{1,3}\\W?\\s*\\n*\\b?\\d*");
+            Scanner sc = new Scanner(text).useDelimiter("[^a-zA-Z]+");
             while (sc.hasNext()){
                 String word = sc.next().toLowerCase();
                 Integer frequency = hashmap.get(word);

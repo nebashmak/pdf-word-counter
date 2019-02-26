@@ -1,9 +1,9 @@
-package file_path;
+package ru.word_counter.file_source;
 
-import file_path.exceptions.NotPdfException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.word_counter.file_source.exceptions.NotPdfException;
 
 import java.io.*;
 
