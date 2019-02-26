@@ -1,6 +1,6 @@
-package file_path;
+package ru.word_counter.file_source;
 
-import file_path.exceptions.NotPdfException;
+import ru.word_counter.file_source.exceptions.NotPdfException;
 
 import java.io.*;
 import java.util.Optional;

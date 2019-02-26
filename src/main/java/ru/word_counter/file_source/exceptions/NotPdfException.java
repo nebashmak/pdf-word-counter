@@ -1,4 +1,4 @@
-package file_path.exceptions;
+package ru.word_counter.file_source.exceptions;
 
 import java.io.IOException;
 
