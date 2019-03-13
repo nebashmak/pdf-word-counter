@@ -8,12 +8,12 @@ import java.util.Optional;
 import static java.util.Objects.isNull;
 
 public class ResourceAware {
-    private ResourceAware() {
-    }
-
     private static InputStream in = System.in;
     // TODO заменить out на логгирование
     private static OutputStream out = System.out;
+
+    private ResourceAware() {
+    }
 
     public static void setIn(InputStream in) {
         ResourceAware.in = in;
@@ -49,7 +49,7 @@ public class ResourceAware {
     }
 
     public static String getPathFromReader(BufferedReader in) throws InterruptedException, IOException {
-        String path = null;
+        String path;
         System.out.println("Введите путь к файлу");
         while (!in.ready()) {
             Thread.sleep(100);
