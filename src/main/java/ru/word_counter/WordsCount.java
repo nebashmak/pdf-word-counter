@@ -11,31 +11,19 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Objects.isNull;
+public class WordsCount {
 
-public class PdfReader {
-
-    private static PdfReader pdfReader;
     private final Map<String, Integer> wordCountMap = new HashMap<>();
 
-    private PdfReader() {
+    public WordsCount() {
     }
 
-    public static PdfReader getPdfReader() {
-        if (isNull(pdfReader)) pdfReader = new PdfReader();
-        return pdfReader;
-    }
-
-    public Map<String, Integer> getWordCountMap() {
-        return wordCountMap;
-    }
-
-    public void countWordsInPdf(String pdfFilePath) {
-        File file = new File(pdfFilePath);
+    public void countWordsInPdf(final String pdfFilePath) {
+        final File file = new File(pdfFilePath);
         System.out.println("Файл получен, идет обработка...");
-        try (PDDocument document = PDDocument.load(file)) {
-            PDFTextStripper stripper = new PDFTextStripper();
-            String text = stripper.getText(document);
+        try (final PDDocument document = PDDocument.load(file)) {
+            final PDFTextStripper stripper = new PDFTextStripper();
+            final String text = stripper.getText(document);
             Arrays.stream(text.split("\\PL+"))
                     .map(String::toLowerCase)
                     .forEach(word -> wordCountMap.merge(word, 1, Integer::sum));

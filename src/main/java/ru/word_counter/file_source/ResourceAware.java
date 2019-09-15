@@ -8,28 +8,20 @@ import java.util.Optional;
 import static java.util.Objects.isNull;
 
 public class ResourceAware {
-    private static InputStream in = System.in;
+
+    private final InputStream in;
+
     // TODO заменить out на логгирование
-    private static OutputStream out = System.out;
+    private final OutputStream out;
 
-    private ResourceAware() {
+    public ResourceAware(InputStream in, OutputStream out) {
+        this.in = in;
+        this.out = out;
     }
 
-    public static void setIn(InputStream in) {
-        ResourceAware.in = in;
-    }
-
-    public static void setOut(OutputStream out) {
-        ResourceAware.out = out;
-    }
-
-    public static String getPath() {
-        return getPath(in, out);
-    }
-
-    public static String getPath(InputStream in, OutputStream out) {
+    public String getPath() {
         String path = null;
-        PrintStream errorOutput = new PrintStream(new BufferedOutputStream(out));
+        final PrintStream errorOutput = new PrintStream(new BufferedOutputStream(out));
         try (BufferedReader pathReader = new BufferedReader(new InputStreamReader(in))) {
             while (isNull(path)) {
                 try {
