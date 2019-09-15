@@ -24,7 +24,7 @@ public class ResourceAwareTest {
     private void initPathReader(byte[] array) {
         inputByteArray = new ByteArrayInputStream(array);
         outputByteArray = new ByteArrayOutputStream(200);
-        pathReader = () -> result = ResourceAware.getPath(inputByteArray, outputByteArray);
+        pathReader = () -> result = new ResourceAware(inputByteArray, outputByteArray).getPath();
         thread = new Thread(pathReader);
         thread.start();
     }
