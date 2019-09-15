@@ -10,7 +10,6 @@ import static java.util.Objects.isNull;
 public class ResourceAware {
 
     private final InputStream in;
-
     // TODO заменить out на логгирование
     private final OutputStream out;
 
